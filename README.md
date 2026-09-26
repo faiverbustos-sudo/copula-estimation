@@ -8,7 +8,8 @@ Dado que Colombia es una economía primario-exportadora, una caída severa en lo
 
 Transformación a Rangos: Mediante la función de distribución empírica (rankdata), se eliminan los sesgos o distribuciones no normales de los retornos individuales de cada activo.
 
-Parámetro $\theta$: Representa la fuerza de asociación entre las variables. Un valor alto de $\theta$ indica un acoplamiento fuerte en momentos de estrés.
+Parámetro $\theta$: Representa la fuerza de asociación entre las variables. Un valor alto de $\theta$ indica un acoplamiento fuerte en momentos de estrés. Parámetro de acoplamiento de la cópula de Clayton ($\theta > 0$): Confirma la presencia de una estructura de dependencia no lineal con asimetría enfocada en la cola conjunta inferior.
 
-Coeficiente de Cola Inferior ($\lambda_L$): Mide la probabilidad condicional de observar una depreciación extrema del Peso Colombiano dado que el barril de Brent sufrió una caída en el percentil más bajo.
+Tau de Kendall ($\tau$): Correlación no paramétrica basada en concordancia de rangos. Muestra una dependencia global moderada a alta en condiciones normales de mercado entre el comportamiento del Brent y el tipo de cambio.
 
+Coeficiente de Cola Inferior ($\lambda_L$): Mide la probabilidad condicional de observar una depreciación extrema del Peso Colombiano dado que el barril de Brent sufrió una caída en el percentil más bajo. Ejemplo: Probabilidad condicional de ocurrencia simultánea de eventos extremos (55.83%): Resultado clave de riesgo: Ante un colapso extremo en el precio del petróleo (percentiles más bajos), existe un 55.83% de probabilidad de observar una depreciación extrema simultánea en la tasa USD/COP.
