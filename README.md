@@ -106,6 +106,77 @@ Con GARCH: $\lambda_L = 0.5273$ ($52.73\%$)
 
 La ligera reducción (~$3.1\%$) demuestra que una pequeña parte de la co-movilidad extrema inicial se debía simplemente a que ambos mercados estaban agitados al mismo tiempo (volatilidad simultánea). Sin embargo, el $52.73\%$ restante es dependencia estructural pura, lo que ratifica que el riesgo de colapso conjunto por transmisión de pánico petrolero hacia el USD/COP en Colombia es real y no un espejismo de la varianza.
 
+# 3. Metodología de Simulación Monte Carlo (Cópula-GARCH)
+
+El algoritmo sigue 4 pasos secuenciales:Muestreo de la Cópula Clayton ($\theta = 1.0831$): 
+
+Generación de $N = 10,000$ pares de variables uniformes $(u_1, u_2)$ que preservan la dependencia en la cola inferior.
+
+Inversión a Residuos Estandarizados: Transformación mediante la inversa de la CDF condicional ($z_i = \Phi^{-1}(u_i)$ o cuantiles empíricos).
+
+Proyección de Volatilidad GARCH(1,1): Proyección a $t+1$ de las desviaciones estándar condicionales $\hat{\sigma}_{1, t+1}$ y $\hat{\sigma}_{2, t+1}$ para reinyectar la heterocedasticidad.
+
+Construcción del Portafolio y Métricas de Riesgo: Generación de retornos simulated $R_{i, sim} = z_{i, sim} \cdot \hat{\sigma}_{i, t+1}$ y cálculo del VaR y Expected Shortfall (CVaR).
+
+### Código en Python: Simulación Monte Carlo del VaR
+Supongamos un portafolio expuesto a Colombia con un valor total de $1,000,000,000 COP (Mil millones de pesos) distribuido en dos posiciones:
+
+50% Posición en Petróleo Brent ($w_1 = 0.50$)
+
+50% Posición en Dólares USD/COP ($w_2 = 0.50$)
+
+### Interpretación Financiera de las Salidas
+
+**Value at Risk (VaR al 95% y 99%):** 
+
+VaR 95%: Existe solo un $5\%$ de probabilidad de que el portafolio sufra una pérdida superior al valor calculado en un horizonte de 24 horas.
+
+VaR 99%: Representa la pérdida máxima en el $99\%$ de los escenarios normales de mercado.
+
+**Expected Shortfall (CVaR):**
+
+A diferencia del VaR tradicional, el CVaR responde a la pregunta: "Si caemos en el $1\%$ de los peores escenarios (cola extrema), ¿cuál es la pérdida promedio que podemos sufrir?".
+
+Debido a la Cópula Clayton, que acumula densidad en la cola conjunta inferior, el CVaR resultará significativamente más severo que en una simulación Gaussiana tradicional, capturando adecuadamente el riesgo de liquidez y contagio en el mercado colombiano.
+
+**Resultado de la simulación de Monte Carlo**
+
+MÉTRICAS DE RIESGO DE PORTAFOLIO (VALOR: $1,000,000,000 COP)
+
+Volatilidad Proyectada (1 día) - Brent   : 1.14%  
+Volatilidad Proyectada (1 día) - USD/COP : 1.47%
+
+VaR 95% (1 día)  : -1.15%  --> Pérdida Máxima: $11,459,399 COP  
+VaR 99% (1 día)  : -1.72%  --> Pérdida Máxima: $17,244,344 COP
+
+CVaR 95% (Expected Shortfall) : $15,027,083 COP  
+CVaR 99% (Expected Shortfall) : $19,883,663 COP
+
+Este reporte cuantifica la máxima pérdida esperada en un horizonte de 1 día hábil para un portafolio de $1.000.000.000 COP (Mil millones de pesos) expuesto al riesgo combinado del petróleo Brent y el tipo de cambio USD/COP, tras incorporar la volatilidad GARCH y la dependencia asimétrica de la Cópula Clayton.
+
+**1. Volatilidad Proyectada a 1 Día (Paso GARCH)**
+
+**Brent (1.14% diario):** Muestra la variabilidad esperada de los rendimientos del petróleo para la siguiente jornada.
+
+**USD/COP (1.47% diario):** Refleja que la tasa de cambio presenta un nivel de riesgo de fluctuación diario mayor que el del petróleo en el escenario proyectado.
+
+**2. Value at Risk (VaR) — Umbrales de Pérdida Máxima**
+
+El VaR define el límite de pérdida en condiciones normales de mercado para un nivel de confianza determinado:
+
+VaR 95% (-1.15% / $11,459,399 COP): Interpretación: En el 95% de los días (19 de cada 20 días hábiles), la pérdida del portafolio no superará los $11.45 millones de COP.Solo existe un $5\%$ de probabilidad (1 de cada 20 días) de sufrir una pérdida mayor a este monto.
+
+VaR 99% (-1.72% / $17,244,344 COP): Interpretación: Bajo condiciones de estrés moderado-severo (el 99% del tiempo), la pérdida máxima en 24 horas no superará los $17.24 millones de COP.Solo hay un $1\%$ de probabilidad de rebasar este umbral en un día estándar de operación.
+
+**3. Expected Shortfall / CVaR — Gravedad en Escenarios Extremos**
+
+El CVaR (Value at Risk Condicional) evalúa qué ocurre cuando el mercado sobrepasa el límite del VaR (caída en la cola extrema de la distribución):
+
+CVaR 95% ($15,027,083 COP): Si el mercado cae en el $5\%$ de los peores días, la pérdida promedio será de $15.02 millones de COP (un $31\%$ más alta que el umbral del VaR al $95\%$).
+
+CVaR 99% ($19,883,663 COP): En el $1\%$ de los días de crisis severa o shocks petroleros, la pérdida media esperada asciende a $19.88 millones de COP (~2.0% del total invertido).
+
+La diferencia sustancial entre el VaR 99% ($17.24M) y el CVaR 99% ($19.88M) confirma que la Cópula Clayton está funcionando adecuadamente, capturando la concentración de riesgo en la cola inferior que las métricas tradicionales basadas en distribución Normal suelen ignorar.
 
 # Dependencias de Python 
 
