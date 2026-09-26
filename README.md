@@ -13,3 +13,11 @@ Parámetro $\theta$: Representa la fuerza de asociación entre las variables. Un
 Tau de Kendall ($\tau$): Correlación no paramétrica basada en concordancia de rangos. Muestra una dependencia global moderada a alta en condiciones normales de mercado entre el comportamiento del Brent y el tipo de cambio.
 
 Coeficiente de Cola Inferior ($\lambda_L$): Mide la probabilidad condicional de observar una depreciación extrema del Peso Colombiano dado que el barril de Brent sufrió una caída en el percentil más bajo. Ejemplo: Probabilidad condicional de ocurrencia simultánea de eventos extremos (55.83%): Resultado clave de riesgo: Ante un colapso extremo en el precio del petróleo (percentiles más bajos), existe un 55.83% de probabilidad de observar una depreciación extrema simultánea en la tasa USD/COP.
+
+## Implicaciones para el Análisis Económico y Financiero
+
+Subestimación del Riesgo bajo Normalidad (Efecto Contagio):Un modelo tradicional basado en matriz de varianzas-covarianzas o correlación lineal de Pearson asumiría que la relación es constante en todo momento. La cópula demuestra que durante mercados tranquilos la correlación es moderada ($\tau \approx 0.37$), pero en momentos de estrés petrolero la dependencia salta al $55.83\%$.
+
+Gestión de Portafolio y Coberturas Cambiarias:Para un inversionista o tesorería corporativa en Colombia, esto significa que las coberturas tradicionales pierden efectividad cuando más se necesitan. En escenarios de pánico petrolero, los activos denominados en pesos se desprecian a un ritmo acelerado debido al fuerte acoplamiento estructural.
+
+Pruebas de Estrés y Value-at-Risk (VaR):El cálculo del Value at Risk (VaR) del presupuesto nacional o de entidades financieras expuestas a hidrocarburos que use distribuciones Gaussianas subestimará sustancialmente las pérdidas en las colas. La cópula de Clayton captura con mayor precisión las necesidades de capital de reserva para shocks fiscales.
