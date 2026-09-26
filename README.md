@@ -1,4 +1,4 @@
-# Implementación en Python: Estimación por Pseudo-Máxima Verosimilitud (CML)
+# Implementación en Python: Estimación por Pseudo-Máxima Verosimilitud (CML) Clayton Copula
 
 En el contexto macroeconómico colombiano, una de las aplicaciones más relevantes de las cópulas econométricas es el análisis de dependencia no lineal entre el precio del petróleo Brent y la tasa de cambio USD/COP.
 
