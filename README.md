@@ -92,7 +92,7 @@ Parámetro Theta ($\theta = 1.0831$): Confirma la presencia de una estructura de
 
 Tau de Kendall ($\tau = 0.3513$): Existe una correlación de rangos limpia del $35.13\%$ entre los shocks inesperados del petróleo y el tipo de cambio.
 
-Dependencia en Cola Inferior ($\lambda_L = 0.5273$):$$\lambda_L = 2^{-1/\theta} = 2^{-1/1.0831} \approx 0.5273$$
+Dependencia en Cola Inferior ($\lambda_L = 0.5273$): $$\lambda_L = 2^{-1/\theta} = 2^{-1/1.0831} \approx 0.5273$$
 
 Conclusión clave: Ante un choque exógeno extremo en el precio del petróleo (caída súbita en el percentil más bajo), existe un $52.73\%$ de probabilidad de que el peso colombiano sufra una depreciación extrema simultánea ese mismo día.
 
