@@ -178,6 +178,27 @@ CVaR 99% ($19,883,663 COP): En el $1\%$ de los días de crisis severa o shocks p
 
 La diferencia sustancial entre el VaR 99% ($17.24M) y el CVaR 99% ($19.88M) confirma que la Cópula Clayton está funcionando adecuadamente, capturando la concentración de riesgo en la cola inferior que las métricas tradicionales basadas en distribución Normal suelen ignorar.
 
+# 4. Backtesting Rolling & Prueba de Kupiec
+
+Se realiza un backtesting fuera de muestra (out-of-sample) con una ventana móvil (rolling window) de 250 días de entrenamiento sobre una serie de 1,000 días de pérdidas del portafolio.
+
+## Interpretación de los Resultados de la Prueba
+
+Evaluación de $p$-valores: Si el $p$-valor de la prueba de Kupiec es mayor a $0.05$, estadísticamente la frecuencia de fallos no difiere de la esperada. Esto demuestra que la combinación GARCH + Cópula Clayton captura de manera adecuada tanto la volatilidad dinámicamente cambiante como la dependencia en colas del mercado colombiano.
+
+Semáforo del Comité de Basilea:
+
+Zona Verde: El modelo se acepta sin penalización de capital.  
+Zona Amarilla: Se requiere incrementar el factor de multiplicación de capital del banco por posible subestimación ligera del riesgo.  
+Zona Roja: El modelo rechaza la hipótesis nula de calibración y debe ser recalculado.
+
+--- VaR 99% ---  
+Violaciones Esperadas  : 7.5 (1.0%)  
+Violaciones Observadas : 6 (0.80%)  
+Estadístico LR         : 0.3253  
+p-valor (Kupiec)       : 0.5684 --> ACEPTADO (Modelo Calibrado)  
+Clasificación Basilea  : VERDE (Modelo Aceptado)
+
 # Dependencias de Python 
 
 Instale las dependencias de Python para ejecutar estos scripts con el siguiente comando Python:
